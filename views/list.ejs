@@ -1,0 +1,52 @@
+    <%- include("header") -%>
+    <!-- <% if(kindOfDay === "Saturday" || kindOfDay === "Sunday"){ %>
+        <h1 style="color: purple;"><%= kindOfDay %> ToDo List! </h1>
+    <% }else{ %>
+        <h1 style="color: blue;"><%= kindOfDay %> ToDo List! </h1>
+        <% } %> -->
+
+    <div id="container">
+           
+      <div id="container-fluid">
+        <div class="background">
+           <div class="cube"></div>
+           <div class="cube"></div>
+           <div class="cube"></div>
+           <div class="cube"></div>
+           <div class="cube"></div>
+        </div>
+        </div>
+        
+        <div id="over">
+            <div class="box" id="heading">
+                <h1><%= kindOfDay %></h1>
+            </div>
+
+            <!-- //changes due to mongodb -->
+            <div class="box" id="scrolling">
+                <% newListItems.forEach(function(item){ %>
+                    <form action="/delete" method="post">
+                        <div class="item">
+                            <input type="checkbox" name="checkbox"  value="<%=item._id%>" onChange="this.form.submit()">
+                            <p><%= item.name %></p>
+                        </div>
+                        <input type="hidden" name="listname" value="<%= kindOfDay %>">
+                    </form>
+                <%}) %>
+
+                <!-- <% for(let i=0; i<newListItems.length; i++){ %>
+                    <div class="item">
+                        <input type="checkbox">
+                        <p><%= newListItems[i].name %></p>
+                    </div>
+                <% } %> -->
+                <form action="/" class="item" method="post">
+                    <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+                    <button type="submit"name="list" value=<%= kindOfDay %>>+</button>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+        <%- include("footer") -%>
